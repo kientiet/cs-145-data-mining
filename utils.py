@@ -38,8 +38,32 @@ def train_test_split(
     )
 
 
+def torch_train_test_split(
+    dataset: pd.DataFrame, drop_columns: List[str]
+) -> Tuple[np.ndarray, ...]:
+    new_dataset = dataset.copy(deep=True)
+    new_dataset["month"] = new_dataset["Date"].map(lambda date: int(date[:2]))
+
+    val_dataset = new_dataset[new_dataset["month"] == 3]
+    train_dataset = new_dataset[new_dataset["month"] != 3]
+
+    train_dataset = train_dataset.drop(columns=drop_columns + ["month"])
+    val_dataset = val_dataset.drop(columns=drop_columns + ["month"])
+
+    return train_dataset, val_dataset
+
+
 def cumulative(data: np.ndarray) -> np.ndarray:
     return np.cumsum(data)
+
+
+def heuristic_smooth(data: np.array) -> np.array:
+    new_data = np.roll(data, 1)
+    data[0] = 0
+
+    result = 0.66 * data + 0.33 * new_data
+
+    return result
 
 
 def evaluation_prediction(
