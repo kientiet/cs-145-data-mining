@@ -22,7 +22,7 @@ def get_data():
 
     return train, test
 
-a
+
 def process_by_state(data):
     dfs = []
     for loc, df in data.groupby('Province_State'):
