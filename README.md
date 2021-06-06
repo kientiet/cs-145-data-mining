@@ -21,4 +21,4 @@ LSTM (Son) (worst score):
 1. Go into `sondang-lstm` folder
 2. Make sure you have python 3.7 and Tensorflow 2.2.0
 3. Run the command `python3 model-v2.py`
-4. After it is done, `submission-lstm.csv` will be created.
+4. After it is done, `sondang_v1.csv` will be created.
